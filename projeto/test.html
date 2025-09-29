@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="icon" href="/projeto/logo.png">
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #333;
+            box-sizing: border-box;
+            overflow-y: hidden;
+        }
+
+        h1 {
+            font-family: "Bungee", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-align: center;
+            color: #292182;
+            margin-bottom: 40px;
+        }
+
+        h2{
+            text-align: center;
+            color: #333;
+
+        }
+
+        .container {
+            flex: 1;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease;
+        }
+
+        form {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #66a6ff;
+            outline: none;
+            box-shadow: 0 0 6px rgba(102, 166, 255, 0.6);
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button.add {
+            background: #28a745;
+            color: #fff;
+        }
+
+        button.edit {
+            background: #ffc107;
+            color: #000;
+        }
+
+        button.delete {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.4s ease-in-out;
+            width: 96%;
+            height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        li.concluida {
+            text-decoration: line-through;
+            background: #d4edda;
+            color: #155724;
+            transition: 0.3s;
+        }
+
+        .acoes {
+            display: flex;
+            gap: 5px;
+        }
+
+        #msg-vazia {
+            text-align: center;
+            color: #555;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        footer {
+            background: linear-gradient(135deg, #4a90e2, #357ab7);
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 14px;
+            margin-top: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer p:first-child {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        footer a {
+            color: #ffdd57;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Task List</h1>
+    </header>
+
+    <div class="container">
+        <h2>📋 Lista de Tarefas</h2>
+
+        <form id="form-tarefa">
+            <input type="text" id="input-tarefa" placeholder="Digite uma nova tarefa..." required>
+            <button type="submit" class="add">➕ Adicionar</button>
+        </form>
+
+        <ul id="lista-tarefas"></ul>
+        <p id="msg-vazia">✨ Nenhuma tarefa ainda. Comece adicionando uma!</p>
+    </div>
+
+    <footer>
+        <p>© Desenvolvido por Kauan / Manuela / Arthur / Carlos / Ana Luiza</p>
+        <p>Mídias: <a href="https://instagram.com/Task_lists" target="_blank">Instagram @Task_lists</a></p>
+    </footer>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+
+
+    <script>
+        const form = document.getElementById("form-tarefa");
+        const input = document.getElementById("input-tarefa");
+        const lista = document.getElementById("lista-tarefas");
+        const msgVazia = document.getElementById("msg-vazia");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const texto = input.value.trim();
+            if (texto === "") return;
+
+            criarTarefa(texto);
+            input.value = "";
+            input.focus();
+            atualizarMensagem();
+        });
+
+        function criarTarefa(texto) {
+            const li = document.createElement("li");
+
+            const span = document.createElement("span");
+            span.textContent = texto;
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.addEventListener("change", function () {
+                li.classList.toggle("concluida");
+            });
+
+            const divAcoes = document.createElement("div");
+            divAcoes.className = "acoes";
+
+            const btnEditar = document.createElement("button");
+            btnEditar.innerHTML = "✏️";
+            btnEditar.className = "edit";
+            btnEditar.addEventListener("click", function () {
+                editarTarefa(span);
+            });
+
+            const btnExcluir = document.createElement("button");
+            btnExcluir.innerHTML = "🗑️";
+            btnExcluir.className = "delete";
+            btnExcluir.addEventListener("click", function () {
+                li.classList.add("removendo");
+                setTimeout(() => {
+                    lista.removeChild(li);
+                    atualizarMensagem();
+                }, 300);
+            });
+
+            divAcoes.appendChild(btnEditar);
+            divAcoes.appendChild(btnExcluir);
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(divAcoes);
+
+            lista.appendChild(li);
+            atualizarMensagem();
+        }
+
+        function editarTarefa(span) {
+            const textoAtual = span.textContent;
+            const inputEdicao = document.createElement("input");
+            inputEdicao.type = "text";
+            inputEdicao.value = textoAtual;
+
+            span.replaceWith(inputEdicao);
+            inputEdicao.focus();
+
+            inputEdicao.addEventListener("blur", salvarEdicao);
+            inputEdicao.addEventListener("keypress", function (e) {
+                if (e.key === "Enter") {
+                    salvarEdicao();
+                }
+            });
+
+            function salvarEdicao() {
+                const novoTexto = inputEdicao.value.trim() || textoAtual;
+                span.textContent = novoTexto;
+                inputEdicao.replaceWith(span);
+            }
+        }
+
+        function atualizarMensagem() {
+            msgVazia.style.display = lista.children.length === 0 ? "block" : "none";
+        }
+
+        // mostra mensagem inicial
+        atualizarMensagem();
+    </script>
+</body>
+
+</html>
