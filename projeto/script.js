@@ -1,4 +1,4 @@
-const url = "http://localhost:3010/tarefas";
+const url = "http://localhost:3000/tarefas";
 
 const form = document.getElementById("form-tarefa");
 const input = document.getElementById("input-tarefa");
@@ -29,6 +29,7 @@ form.addEventListener("submit", async function (e) {
         console.error("Erro ao salvar tarefa no servidor");
     }
 });
+
 
 async function carregarTarefas() {
     try {
@@ -105,6 +106,8 @@ function editarTarefa(span) {
         inputEdicao.replaceWith(span);
     }
 }
+
+
 
 function atualizarMensagem() {
     msgVazia.style.display = lista.children.length === 0 ? "block" : "none";

@@ -115,7 +115,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            
+
         }
 
         li.concluida {
@@ -192,6 +192,11 @@
             color: #fff;
             text-decoration: underline;
         }
+
+        .feito .tarefa {
+            text-decoration: line-through;
+            color: #888;
+        }
     </style>
 </head>
 
@@ -204,7 +209,8 @@
         <h2>📋 Lista de Tarefas</h2>
 
         <form id="form-tarefa">
-            <textarea id="input-tarefa" placeholder="Digite uma nova tarefa..." rows="2" maxlength="50" required></textarea>
+            <textarea id="input-tarefa" placeholder="Digite uma nova tarefa..." rows="2" maxlength="50"
+                required></textarea>
             <button type="submit" class="add">➕ Adicionar</button>
         </form>
 
@@ -217,7 +223,7 @@
         <p>Mídias: <a href="https://instagram.com/Task_lists" target="_blank">Instagram @Task_lists</a></p>
     </footer>
 
-    <script src="/projeto/server.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
