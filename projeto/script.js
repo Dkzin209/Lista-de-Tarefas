@@ -14,6 +14,7 @@ form.addEventListener("submit", async function (e) {
     if (texto === "") return;
 
 
+
     const resposta = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -106,7 +107,6 @@ function editarTarefa(span) {
         inputEdicao.replaceWith(span);
     }
 }
-
 
 
 function atualizarMensagem() {
