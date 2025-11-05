@@ -2,15 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;}
 
 body {
     background-color: #fff;
     color: #000;
 }
 
-/* NAVBAR */
 .navbar {
     background-color: #7273e0;
     display: flex;
@@ -51,7 +49,6 @@ body {
     background-color: #e6e6e6;
 }
 
-/* FOTO OU FRASE */
 .hero {
     height: 200px;
     display: flex;
@@ -61,7 +58,6 @@ body {
     font-weight: 600;
 }
 
-/* INFORMAÇÕES SOBRE O PROJETO */
 .info-section {
     display: flex;
     justify-content: center;
@@ -82,7 +78,6 @@ body {
     text-align: center;
 }
 
-/* REGIÕES QUE ATUAMOS */
 .regions {
     display: flex;
     justify-content: center;
@@ -100,14 +95,12 @@ body {
     font-weight: 600;
 }
 
-/* OUTRAS INFORMAÇÕES */
 .extra {
     text-align: center;
     margin: 40px 0;
     font-weight: 600;
 }
 
-/* FOOTER */
 .footer {
     background-color: #7273e0;
     text-align: center;
